@@ -1,0 +1,48 @@
+<div class="card border-primary mb-3" >
+  <div class="card-header">Competiciones</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de competiciones</h5>
+    <div class="my-2 text-left">
+  </div>
+
+  <div *ngIf="competiciones?.length == 0" class="alert alert-info">
+    No hay registros en la base de datos 
+  </div>
+  
+
+
+    <table class="table table-bordered table-striped" *ngIf="competiciones?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Nombre</th>
+          <th>Descripcion </th>
+          <th>plazas</th>
+          <th>lugar del evento</th>
+          <th>dificultad</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
+        <tr *ngFor="let competicion of competiciones">
+          <td>{{competicion.id_competicion}}</td>
+          <td>{{competicion.nombre_competicion}}</td>
+          <td>{{competicion.descripcion}}</td>
+          <td>{{competicion.plazas}}</td>
+          <td>{{competicion.lugar_evento }}</td>
+          <td>{{competicion.dificultad }}</td>
+
+          
+        </tr>
+      </tbody>
+
+    </table>
+    <!--[paginador] es el nombre que le damos al atributo en el componente paginador
+     y el ='' 
+    se le inyecta al atributo en el hijo
+  El de la clase padre se inyecta en el de la clase hijo
+si el paginador existe en el padre, se le inyecta al hijo
+    <app-paginator *ngIf="paginador" [paginador]="paginador" ></app-paginator>-->
+  </div> 
+</div>
