@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Competicion} from './competicion';
-import {COMPETICIONES} from './competiciones.json';
 import {CompeticionService} from './competicion.service';
 @Component({
   selector: 'app-competiciones',

@@ -9,11 +9,14 @@
     No hay registros en la base de datos 
   </div>
   
-
+  <div class="my-2 text-left"> 
+    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="[ '/institutos/form']">Añadir instituto</button>
+  </div>
 
     <table class="table table-bordered table-striped" *ngIf="institutos?.length>0">
       <thead>
         <tr>
+          <th>ID</th>
           <th>CIF</th>
           <th>Nombre</th>
           <th>Localizacion </th>
@@ -24,7 +27,8 @@
       <tbody>
         <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
         <tr *ngFor="let instituto of institutos">
-          <td>{{instituto.CIF_INSTITUTO}}</td>
+          <td>{{instituto.id_instituto}}</td>
+          <td>{{instituto.cif_instituto}}</td>
           <td>{{instituto.nombre}}</td>
           <td>{{instituto.localizacion}}</td>
           <td>{{instituto.telefono_contacto}}</td>

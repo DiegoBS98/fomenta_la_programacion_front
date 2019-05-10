@@ -1,0 +1,51 @@
+<div class="card bg-dark text-white">
+  <div>{{ titulo }}</div>
+  <div class="card-body">
+    <form  (ngSubmit)="crear()" >
+      <!--Nombre-->
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2" >Nombre del instituto</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" name="nombre" [(ngModel)]="instituto.nombre"/>
+        </div>
+      </div>
+      <!--CIF --> 
+      <div class="form-group row">
+        <label for="cif" class="col-form-label col-sm-2">CIF</label>
+        <div class="col-sm-12">
+          <input type="text" name="cif" [(ngModel)]="instituto.cif_instituto">
+        </div>
+      </div>
+
+      <!--Localización--> 
+      <div class="form-group row">
+        <label for="localizacion" class="col-form-label col-sm-2">Dirección del instituto</label>
+        <div class="col-sm-12"> 
+          <input type="text" class="form-control" name="localizacion" [(ngModel)]="instituto.localizacion">
+        </div>
+      </div>
+
+      <!-- Telefono-contacto--> 
+      <div class="form-group row">
+        <label for="tlf" class="col-form-label col-sm-2">Teléfono de contacto</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" [(ngModel)]="instituto.telefono_contacto" name="tlf">
+        </div>
+      </div>
+
+      <!-- email-contacto --> 
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">Email de contacto</label>
+        <div class="col-sm-12">
+          <input type="email" name="email" [(ngModel)]="instituto.email_contacto">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button">Añadir</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

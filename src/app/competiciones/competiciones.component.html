@@ -9,7 +9,9 @@
     No hay registros en la base de datos 
   </div>
   
-
+  <div class="my-2 text-left"> 
+    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="[ '/competiciones/form']">Crear evento</button>
+  </div>
 
     <table class="table table-bordered table-striped" *ngIf="competiciones?.length>0">
       <thead>
@@ -26,11 +28,11 @@
       <tbody>
         <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
         <tr *ngFor="let competicion of competiciones">
-          <td>{{competicion.id_competicion}}</td>
-          <td>{{competicion.nombre_competicion}}</td>
+          <td>{{competicion.idCompeticion}}</td>
+          <td>{{competicion.nombreCompeticion}}</td>
           <td>{{competicion.descripcion}}</td>
           <td>{{competicion.plazas}}</td>
-          <td>{{competicion.lugar_evento }}</td>
+          <td>{{competicion.lugarEvento }}</td>
           <td>{{competicion.dificultad }}</td>
 
           

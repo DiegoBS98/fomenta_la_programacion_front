@@ -1,10 +1,10 @@
 export class Competicion {
 
-    id_competicion : number;
-    nombre_competicion : string;
+    idCompeticion : number;
+    nombreCompeticion : string;
     descripcion : string;
     plazas : number;
-    lugar_evento : string;
+    lugarEvento : string;
     dificultad : number;
 
 }

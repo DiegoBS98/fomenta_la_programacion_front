@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import{INSTITUTOS} from './institutos.json';
 import{Instituto} from './instituto';
 import {of, Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
