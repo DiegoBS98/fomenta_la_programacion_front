@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Competicion} from './competicion'
 import {of, Observable} from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class CompeticionService {
+
+  private httpHeader : HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   /**
    * 
@@ -23,4 +25,8 @@ export class CompeticionService {
      */
     return this.http.get<Competicion[]>(this.urlBack);
   }
+
+  create(competicion : Competicion) :Observable<Competicion>{
+    return this.http.post<Competicion>(this.urlBack, competicion, {headers : this.httpHeader})
+  } 
 }

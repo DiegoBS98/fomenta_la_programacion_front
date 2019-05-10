@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Instituto } from './instituto';
+import { InstitutoService } from './instituto.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-instituto',
@@ -10,14 +12,18 @@ export class FormInstitutoComponent implements OnInit {
 
   instituto : Instituto = new Instituto();
   private titulo : string = 'Añadir Instituto';
-  
-  constructor() { }
+
+  constructor(private institutoService : InstitutoService, private router : Router) { }
 
   ngOnInit() {
   }
 
   public crear() : void{
-    console.log("Ha clickado");
-    console.log(this.instituto);
+    /**
+      * Invocamos el metodo create de la clase service
+      */
+     this.institutoService.create(this.instituto).subscribe(
+      response => this.router.navigate(['/institutos'])
+     )
   }
 }

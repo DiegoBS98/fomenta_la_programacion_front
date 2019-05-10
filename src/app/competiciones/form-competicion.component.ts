@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Competicion } from './competicion';
+import { CompeticionService } from './competicion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-competicion',
@@ -15,7 +17,11 @@ export class FormCompeticionComponent implements OnInit {
   private competicion : Competicion = new Competicion();
 
   private titulo:string = 'Crear Evento'
-  constructor() { }
+  /**
+   * Como tendremos que implementar los metodos crud de la clase service
+   * tenemos que inyectarla en el constructor
+   */
+  constructor(private competicionService : CompeticionService,private router : Router) { }
 
   ngOnInit() {
   }
@@ -25,8 +31,12 @@ export class FormCompeticionComponent implements OnInit {
    */
 
    public crear() : void{
-     console.log("Ha clickado");
-     console.log(this.competicion);
+     /**
+      * Invocamos el metodo create de la clase service
+      */
+     this.competicionService.create(this.competicion).subscribe(
+       response => this.router.navigate(['/competiciones'])
+     )
    }
 
 }
