@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Competicion } from './competicion';
 import { CompeticionService } from './competicion.service';
 import { Router } from '@angular/router';
+import Swa1 from 'sweetalert2'
 
 @Component({
   selector: 'app-form-competicion',
@@ -35,7 +36,10 @@ export class FormCompeticionComponent implements OnInit {
       * Invocamos el metodo create de la clase service
       */
      this.competicionService.create(this.competicion).subscribe(
-       response => this.router.navigate(['/competiciones'])
+       competicion => {
+         this.router.navigate(['/competiciones'])
+         Swa1.fire('Nuevo evento', `Evento ${competicion.nombreCompeticion} creado con exito`, 'success')
+       }
      )
    }
 

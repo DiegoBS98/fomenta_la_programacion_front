@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Instituto } from './instituto';
 import { InstitutoService } from './instituto.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-instituto',
@@ -23,7 +24,10 @@ export class FormInstitutoComponent implements OnInit {
       * Invocamos el metodo create de la clase service
       */
      this.institutoService.create(this.instituto).subscribe(
-      response => this.router.navigate(['/institutos'])
+      instituto => {
+        this.router.navigate(['/institutos'])
+        Swal.fire('Instituto añadido', `Instituto ${instituto.nombre} añadido con éxito`, 'success')
+      }
      )
   }
 }
