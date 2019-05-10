@@ -22,6 +22,8 @@
           <th>plazas</th>
           <th>lugar del evento</th>
           <th>dificultad</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
           
         </tr>
       </thead>
@@ -34,7 +36,12 @@
           <td>{{competicion.plazas}}</td>
           <td>{{competicion.lugarEvento }}</td>
           <td>{{competicion.dificultad }}</td>
-
+          <td>
+            <button type="button" name="button"  [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]" class="btn btn-primary">Editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar"  (click)="delete(competicion)" class="btn btn-primary">Eliminar</button>
+          </td>
           
         </tr>
       </tbody>

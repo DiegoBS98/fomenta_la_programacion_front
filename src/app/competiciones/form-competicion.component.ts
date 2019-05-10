@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Competicion } from './competicion';
 import { CompeticionService } from './competicion.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swa1 from 'sweetalert2'
 
 @Component({
@@ -22,14 +22,28 @@ export class FormCompeticionComponent implements OnInit {
    * Como tendremos que implementar los metodos crud de la clase service
    * tenemos que inyectarla en el constructor
    */
-  constructor(private competicionService : CompeticionService,private router : Router) { }
+  constructor(private competicionService : CompeticionService,
+    private router : Router,
+    private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
+    this.cargarCompeticion()
   }
 
   /**
    * Metodo al que llamaremos cuando se envie el formulario
    */
+
+   cargarCompeticion() : void{
+    this.activatedRoute.params.subscribe(params =>{
+      let id = params[`id`]
+      if(id){
+        this.competicionService.getCompeticion(id).subscribe(
+          (competicion) => this.competicion = competicion
+        )
+      }
+    })
+   }
 
    public crear() : void{
      /**
@@ -41,6 +55,16 @@ export class FormCompeticionComponent implements OnInit {
          Swa1.fire('Nuevo evento', `Evento ${competicion.nombreCompeticion} creado con exito`, 'success')
        }
      )
+   }
+
+   actualizar():void{
+    this.competicionService.update(this.competicion)
+    .subscribe(
+      competicion => {
+        this.router.navigate(['/competiciones'])
+         Swa1.fire('Evento actualizado', `Evento ${competicion.nombreCompeticion} actualizado con exito`, 'success')
+      }
+    )
    }
 
 }

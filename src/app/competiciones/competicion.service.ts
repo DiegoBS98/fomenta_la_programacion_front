@@ -1,32 +1,44 @@
 import { Injectable } from '@angular/core';
-import {Competicion} from './competicion'
-import {of, Observable} from 'rxjs';
+import { Competicion } from './competicion'
+import { of, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class CompeticionService {
 
-  private httpHeader : HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private httpHeader: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   /**
    * 
    * Declaramos variable con la ruta del backend
    */
-  urlBack : string = 'http://localhost:8080/competiciones';
+  urlBack: string = 'http://localhost:8080/competiciones';
   /**
    * Declaramos la variable con la respuesta del back
    */
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getCompeticiones():Observable<Competicion[]>{
+  getCompeticiones(): Observable<Competicion[]> {
     /**
      * Creamos el flujo con los datos que nos llegan para poder devovlerlos como observable
      */
     return this.http.get<Competicion[]>(this.urlBack);
   }
 
-  create(competicion : Competicion) :Observable<Competicion>{
-    return this.http.post<Competicion>(this.urlBack, competicion, {headers : this.httpHeader})
-  } 
-}
+  create(competicion: Competicion): Observable<Competicion> {
+    return this.http.post<Competicion>(this.urlBack, competicion, { headers: this.httpHeader })
+  }
+
+  getCompeticion(id): Observable<Competicion> {
+    return this.http.get<Competicion>(`${this.urlBack}/${id}`)
+  }
+
+  update(competicion: Competicion): Observable<Competicion> {
+    return this.http.put<Competicion>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, { headers: this.httpHeader })
+  }
+
+  delete(id : number) : Observable<Competicion>{
+    return this.http.delete<Competicion>(`${this.urlBack}/${id}`, {headers : this.httpHeader})
+  }
+} 

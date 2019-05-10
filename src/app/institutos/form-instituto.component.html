@@ -1,7 +1,7 @@
 <div class="card bg-dark text-white">
   <div>{{ titulo }}</div>
   <div class="card-body">
-    <form  (ngSubmit)="crear()" >
+    <form>
       <!--Nombre-->
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2" >Nombre del instituto</label>
@@ -43,7 +43,12 @@
 
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button">Añadir</button>
+          <button class="btn btn-primary" role="button"  *ngIf="!instituto.id_instituto else bloqueElse" (click)="create()">Añadir</button>
+
+          <ng-template #bloqueElse>
+            <button class="btn btn-primary" role="button"  (click)="update()">Editar</button>
+          </ng-template>
+          
         </div>
       </div>
     </form>

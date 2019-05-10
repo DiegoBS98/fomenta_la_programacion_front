@@ -5,7 +5,7 @@
     <div class="my-2 text-left">
   </div>
 
-  <div *ngIf="competiciones?.length == 0" class="alert alert-info">
+  <div *ngIf="institutos?.length == 0" class="alert alert-info">
     No hay registros en la base de datos 
   </div>
   
@@ -22,6 +22,8 @@
           <th>Localizacion </th>
           <th>Telefono de contacto</th>
           <th>Email de Contacto</th>  
+          <th>Editar</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +35,12 @@
           <td>{{instituto.localizacion}}</td>
           <td>{{instituto.telefono_contacto}}</td>
           <td>{{instituto.email_contacto }}</td>
+          <td>
+            <button type="button" name="button"  [routerLink]="[ '/institutos/form', instituto.id_instituto ]" class="btn btn-primary">Editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar"  (click)="delete(instituto)" class="btn btn-primary">Eliminar</button>
+          </td>
         </tr>
       </tbody>
 

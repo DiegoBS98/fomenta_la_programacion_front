@@ -21,7 +21,9 @@ const routes:Routes = [
   {path: 'institutos', component: InstitutosComponent},
   {path: 'competiciones', component: CompeticionesComponent},
   {path: 'competiciones/form', component: FormCompeticionComponent},
-  {path: 'institutos/form', component: FormInstitutoComponent}
+  {path: 'competiciones/form/:id', component: FormCompeticionComponent},
+  {path: 'institutos/form', component: FormInstitutoComponent},
+  {path: 'institutos/form/:id', component: FormInstitutoComponent}
 ];
 
 @NgModule({
