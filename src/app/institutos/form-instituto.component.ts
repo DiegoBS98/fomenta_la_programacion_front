@@ -38,9 +38,9 @@ export class FormInstitutoComponent implements OnInit {
       * Invocamos el metodo create de la clase service
       */
      this.institutoService.create(this.instituto).subscribe(
-      instituto => {
+      response => {
         this.router.navigate(['/institutos'])
-        Swal.fire('Instituto añadido', `Instituto ${instituto.nombre} añadido con éxito`, 'success')
+        Swal.fire('Instituto añadido', `Instituto ${response.instituto.nombre} añadido con éxito`, 'success')
       }
      )
   }
@@ -48,9 +48,9 @@ export class FormInstitutoComponent implements OnInit {
   update() : void
   {
     this.institutoService.update(this.instituto).subscribe(
-      instituto => {
+      response => {
         this.router.navigate(['/institutos'])
-        Swal.fire('Instituto actualizado', `Instituto ${instituto.nombre} actualizado con éxito`, 'success') 
+        Swal.fire('Instituto actualizado', `Instituto ${response.instituto.nombre} actualizado con éxito`, 'success') 
       } 
     )
   }
