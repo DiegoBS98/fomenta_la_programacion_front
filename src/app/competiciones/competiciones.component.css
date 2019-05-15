@@ -1,0 +1,32 @@
+.card{
+    margin-left: 5px;
+    justify-content: center;
+}
+
+.fondo {
+    background-image: linear-gradient(-90deg, #45526E, #8497b5);
+    color:#f4f3f3;
+    margin-top: 20%;
+    margin-bottom: 20%;
+}
+
+.botonesFijos{
+    
+    height: 80px;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    display: block;
+
+}
+.espacios{
+    background-image: linear-gradient(-90deg, #08090b, #12292b);
+
+    margin:auto;
+    margin-left: 1px;
+    background-color: #12292b;
+    border: #12292b;
+    width: 150px;
+    margin-top: 10px;
+}
+        

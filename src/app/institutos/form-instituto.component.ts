@@ -13,6 +13,7 @@ export class FormInstitutoComponent implements OnInit {
 
   instituto : Instituto = new Instituto();
   private titulo : string = 'Añadir Instituto';
+  private errores : string[];
 
   constructor(private institutoService : InstitutoService, 
     private router : Router,
@@ -41,6 +42,11 @@ export class FormInstitutoComponent implements OnInit {
       response => {
         this.router.navigate(['/institutos'])
         Swal.fire('Instituto añadido', `Instituto ${response.instituto.nombre} añadido con éxito`, 'success')
+      },
+      err => {
+        this.errores = err.error.errores as string[];
+        console.log('Codigo de error desde el backend: ' +err.status );
+        console.log(err.error.errores);
       }
      )
   }
@@ -51,7 +57,12 @@ export class FormInstitutoComponent implements OnInit {
       response => {
         this.router.navigate(['/institutos'])
         Swal.fire('Instituto actualizado', `Instituto ${response.instituto.nombre} actualizado con éxito`, 'success') 
-      } 
+      } ,
+      err => {
+        this.errores = err.error.errores as string[];
+        console.log('Codigo de error desde el backend: ' +err.status );
+        console.log(err.error.errores);
+      }
     )
   }
 }

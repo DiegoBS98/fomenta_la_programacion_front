@@ -2,3 +2,5 @@
 a {
     color: #12292b;
 }
+
+body#LoginForm{ background-image: linear-gradient(-90deg, #FEE7E7, #F3F2F2); background-repeat:no-repeat; background-position:center; background-size:cover; }

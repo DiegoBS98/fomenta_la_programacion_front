@@ -1,6 +1,6 @@
 <nav class="fondo navbar navbar-expand-lg">
 
-  <img src="../assets/images/madrid.png" width="60" height="40" alt="Imagen de Bandera de Comunidad de Madrid">
+  <img src="../assets/images/madridestrellas.png" width="80" height="40" alt="Imagen de Bandera de Comunidad de Madrid">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,16 +10,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink='/competiciones'>Competiciones</a>
+        <a class="nav-link" routerLink='/competiciones'>COMPETICIONES</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink='/institutos'>Institutos</a>
+        <a class="nav-link" routerLink='/institutos'>INSTITUTOS</a>
       </li>
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <div class="row botonesFijos">
+          <button type="button" name="button" [routerLink]="[]"
+              class="btn btn-primary espacios">Login</button>
+      </div>
     </form>
   </div>
 </nav>

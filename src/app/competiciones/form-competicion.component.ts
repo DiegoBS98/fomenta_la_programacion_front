@@ -16,7 +16,7 @@ export class FormCompeticionComponent implements OnInit {
    * Esto se llama hacer un Binding
    */
   private competicion : Competicion = new Competicion();
-
+  private errores : string[];
   private titulo:string = 'Crear Evento'
   /**
    * Como tendremos que implementar los metodos crud de la clase service
@@ -49,10 +49,16 @@ export class FormCompeticionComponent implements OnInit {
      /**
       * Invocamos el metodo create de la clase service
       */
-     this.competicionService.create(this.competicion).subscribe(
+     this.competicionService.create(this.competicion)
+     .subscribe(
        response => {
          this.router.navigate(['/competiciones'])
          Swa1.fire('Nuevo evento', `Evento ${response.evento.nombreCompeticion} creado con exito`, 'success')
+       },
+       err => {
+         this.errores = err.error.errores as string[];
+         console.log('Codigo de error desde el backend: ' +err.status );
+         console.log(err.error.errores);
        }
      )
    }
@@ -63,6 +69,11 @@ export class FormCompeticionComponent implements OnInit {
       response => {
         this.router.navigate(['/competiciones'])
          Swa1.fire('Evento actualizado', `Evento ${response.evento.nombreCompeticion} actualizado con exito`, 'success')
+      },
+      err => {
+        this.errores = err.error.errores as string[];
+        console.log('Codigo de error desde el backend: ' +err.status );
+        console.log(err.error.errores);
       }
     )
    }

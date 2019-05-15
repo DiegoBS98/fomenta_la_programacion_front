@@ -12,6 +12,7 @@ import{HttpClient, HttpClientModule} from '@angular/common/http';
 import { FormCompeticionComponent } from './competiciones/form-competicion.component';
 import {FormsModule} from '@angular/forms';
 import { FormInstitutoComponent } from './institutos/form-instituto.component';
+import { LoginComponent } from './usuarios/login.component';
 
 /**
  * Creamos constante con array de rutas
@@ -23,6 +24,7 @@ const routes:Routes = [
   {path: 'competiciones/form', component: FormCompeticionComponent},
   {path: 'competiciones/form/:id', component: FormCompeticionComponent},
   {path: 'institutos/form', component: FormInstitutoComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'institutos/form/:id', component: FormInstitutoComponent}
 ];
 
@@ -34,7 +36,8 @@ const routes:Routes = [
     CompeticionesComponent,
     InstitutosComponent,
     FormCompeticionComponent,
-    FormInstitutoComponent
+    FormInstitutoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
