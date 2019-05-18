@@ -51,9 +51,9 @@ export class FormCompeticionComponent implements OnInit {
       */
      this.competicionService.create(this.competicion)
      .subscribe(
-       response => {
+       competicion => {
          this.router.navigate(['/competiciones'])
-         Swa1.fire('Nuevo evento', `Evento ${response.evento.nombreCompeticion} creado con exito`, 'success')
+         Swa1.fire('Nuevo evento', `Evento ${competicion.nombreCompeticion} creado con exito`, 'success')
        },
        err => {
          this.errores = err.error.errores as string[];
@@ -66,9 +66,9 @@ export class FormCompeticionComponent implements OnInit {
    actualizar():void{
     this.competicionService.update(this.competicion)
     .subscribe(
-      response => {
+      competicion => {
         this.router.navigate(['/competiciones'])
-         Swa1.fire('Evento actualizado', `Evento ${response.evento.nombreCompeticion} actualizado con exito`, 'success')
+         Swa1.fire('Evento actualizado', `Evento ${competicion.nombreCompeticion} actualizado con exito`, 'success')
       },
       err => {
         this.errores = err.error.errores as string[];
