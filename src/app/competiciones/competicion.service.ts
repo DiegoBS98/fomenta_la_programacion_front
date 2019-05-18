@@ -5,6 +5,7 @@ import { catchError, map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import swa1 from 'sweetalert2';
 import {Router} from '@angular/router'
+import { LoginService } from '../usuarios/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,17 +24,40 @@ export class CompeticionService {
    * Declaramos la variable con la respuesta del back
    */
   constructor(private http: HttpClient,
-    private router : Router) { }
+    private router : Router,
+    private loginService : LoginService) { }
 
-     isNoAutorizado(e): boolean{
-      if(e.status==401 ||e.status==403){
+  
+  
+    isNoAutorizado(e): boolean{
+      if(e.status==401){
+        /**Para que la sesion expire cuando el token haya caducado.. */ 
+        if(this.loginService.isAuthenticated()){
+            this.loginService.logout();
+          }
+
         this.router.navigate(['/login']);
+        return true;
+      }
+      if(e.status==403){
+        this.router.navigate(['/competiciones']);
+        swa1.fire('Permisos', 'No tiene suficientes permisos para realizar esta accion', 'warning')
         return true;
       }
       return false;
     }
 
-  getCompeticiones(): Observable<Competicion[]> {
+    private agregarAuthorizationHeader(){
+      //Conseguimos el token
+      let token = this.loginService.token;
+      if(token != null){
+        return this.httpHeader.append('Authorization', 'Bearer' + token)
+      }
+      return this.httpHeader;
+    }
+  
+  
+    getCompeticiones(): Observable<Competicion[]> {
     /**
      * Creamos el flujo con los datos que nos llegan para poder devovlerlos como observable
      */
@@ -46,7 +70,7 @@ export class CompeticionService {
   }
 
   create(competicion: Competicion): Observable<Competicion> {
-    return this.http.post(this.urlBack, competicion, { headers: this.httpHeader }).pipe(
+    return this.http.post(this.urlBack, competicion, { headers: this.agregarAuthorizationHeader() }).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
         if(this.isNoAutorizado(e)){
@@ -67,7 +91,7 @@ export class CompeticionService {
   }
 
   getCompeticion(id): Observable<Competicion> {
-    return this.http.get<Competicion>(`${this.urlBack}/${id}`).pipe(
+    return this.http.get<Competicion>(`${this.urlBack}/${id}`,{headers : this.agregarAuthorizationHeader() }).pipe(
       catchError(e => {
      
         if(this.isNoAutorizado(e)){
@@ -84,8 +108,8 @@ export class CompeticionService {
     )
   }
 
-  public update(competicion: Competicion): Observable<Competicion> {
-    return this.http.put(`${this.urlBack}/${competicion.idCompeticion}`, competicion, { headers: this.httpHeader }).pipe(
+  public update(competicion: Competicion): Observable<any> {
+    return this.http.put<any>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, { headers: this.agregarAuthorizationHeader()  }).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
         if(this.isNoAutorizado(e)==true){
@@ -106,7 +130,7 @@ export class CompeticionService {
   }
 
   delete(id : number) : Observable<Competicion>{
-    return this.http.delete<Competicion>(`${this.urlBack}/${id}`, {headers : this.httpHeader}).pipe(
+    return this.http.delete<Competicion>(`${this.urlBack}/${id}`, {headers : this.agregarAuthorizationHeader() }).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
        

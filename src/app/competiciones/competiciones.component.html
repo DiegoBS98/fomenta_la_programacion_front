@@ -13,10 +13,10 @@
           <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
           <p class="card-text text-center">{{competicion.descripcion}}</p>
           <div class="row botonesFijos">
-          <button type="button" name="button" [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
+          <button   type="button" name="button" [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
               class="btn btn-primary espacios">Editar</button>
             
-              <button type="button" name="eliminar" (click)="delete(competicion)"
+              <button   type="button" name="eliminar" (click)="delete(competicion)"
               class="btn btn-primary espacios">Eliminar</button>
             </div>
         </div>

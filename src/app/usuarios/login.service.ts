@@ -68,4 +68,25 @@ export class LoginService {
     
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
+
+  isAuthenticated() : boolean {
+    let payload = this.obtenerDatosToken(this.token);
+    if(payload != null && payload.user_name && payload.user_name.length > 0){
+      return true;
+    }
+    return false;
+  }
+
+  hasRole(role: string): boolean {
+    if (this.usuario.roles.includes(role)) {
+      return true;
+    }
+    return false;
+  }
+
+  logout() : void {
+    this._token=null;
+    this._usuario=null;
+    sessionStorage.clear();
+  }
 }

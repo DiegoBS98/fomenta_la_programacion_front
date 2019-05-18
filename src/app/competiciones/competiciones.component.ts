@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Competicion} from './competicion';
 import {CompeticionService} from './competicion.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../usuarios/login.service';
 @Component({
   selector: 'app-competiciones',
   templateUrl: './competiciones.component.html',
@@ -11,7 +12,7 @@ export class CompeticionesComponent implements OnInit {
 
 competiciones : Competicion[];
 
-  constructor( private competicionService : CompeticionService) { }
+  constructor( private competicionService : CompeticionService,private loginService : LoginService) { }
 
     ngOnInit() {
       this.competicionService.getCompeticiones().subscribe(

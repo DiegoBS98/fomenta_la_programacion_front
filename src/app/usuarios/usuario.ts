@@ -11,4 +11,6 @@ export class Usuario {
 	
 	emailUsuario : string;
 
+	roles: string[] = [];
+
 }
