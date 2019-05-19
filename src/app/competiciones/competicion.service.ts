@@ -34,10 +34,9 @@ export class CompeticionService {
         /**Para que la sesion expire cuando el token haya caducado.. */ 
         if(this.loginService.isAuthenticated()){
             this.loginService.logout();
+            this.router.navigate(['/login']);
+            return true;
           }
-
-        this.router.navigate(['/login']);
-        return true;
       }
       if(e.status==403){
         this.router.navigate(['/competiciones']);
@@ -70,7 +69,7 @@ export class CompeticionService {
   }
 
   create(competicion: Competicion): Observable<Competicion> {
-    return this.http.post(this.urlBack, competicion, { headers: this.agregarAuthorizationHeader() }).pipe(
+    return this.http.post(this.urlBack, competicion).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
         if(this.isNoAutorizado(e)){
@@ -91,7 +90,7 @@ export class CompeticionService {
   }
 
   getCompeticion(id): Observable<Competicion> {
-    return this.http.get<Competicion>(`${this.urlBack}/${id}`,{headers : this.agregarAuthorizationHeader() }).pipe(
+    return this.http.get<Competicion>(`${this.urlBack}/${id}`).pipe(
       catchError(e => {
      
         if(this.isNoAutorizado(e)){
@@ -109,7 +108,7 @@ export class CompeticionService {
   }
 
   public update(competicion: Competicion): Observable<any> {
-    return this.http.put<any>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, { headers: this.agregarAuthorizationHeader()  }).pipe(
+    return this.http.put<any>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, {headers : this.agregarAuthorizationHeader() }).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
         if(this.isNoAutorizado(e)==true){
@@ -130,7 +129,7 @@ export class CompeticionService {
   }
 
   delete(id : number) : Observable<Competicion>{
-    return this.http.delete<Competicion>(`${this.urlBack}/${id}`, {headers : this.agregarAuthorizationHeader() }).pipe(
+    return this.http.delete<Competicion>(`${this.urlBack}/${id}`).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
        

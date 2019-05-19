@@ -8,11 +8,16 @@ import { CompeticionesComponent } from './competiciones/competiciones.component'
 import{CompeticionService} from './competiciones/competicion.service';
 import { InstitutosComponent } from './institutos/institutos.component';
 import{RouterModule, Routes} from '@angular/router';
-import{HttpClient, HttpClientModule} from '@angular/common/http';
+import{HttpClient, HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormCompeticionComponent } from './competiciones/form-competicion.component';
 import {FormsModule} from '@angular/forms';
 import { FormInstitutoComponent } from './institutos/form-instituto.component';
 import { LoginComponent } from './usuarios/login.component';
+import { AutenticacionGuard } from './usuarios/guards/autenticacion.guard';
+import { RoleGuard } from './usuarios/guards/role.guard';
+import{TokenInterceptor} from './usuarios/interceptores/token.interceptor'
+import { InstitutoService } from './institutos/instituto.service';
+
 
 /**
  * Creamos constante con array de rutas
@@ -21,11 +26,11 @@ const routes:Routes = [
   {path: '', redirectTo: '/competiciones', pathMatch: 'full'},
   {path: 'institutos', component: InstitutosComponent},
   {path: 'competiciones', component: CompeticionesComponent},
-  {path: 'competiciones/form', component: FormCompeticionComponent},
-  {path: 'competiciones/form/:id', component: FormCompeticionComponent},
-  {path: 'institutos/form', component: FormInstitutoComponent},
+  {path: 'competiciones/form', component: FormCompeticionComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'institutos/form/:id', component: FormInstitutoComponent}
+  {path: 'institutos/form/:id', component: FormInstitutoComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'} }
 ];
 
 @NgModule({
@@ -37,7 +42,7 @@ const routes:Routes = [
     InstitutosComponent,
     FormCompeticionComponent,
     FormInstitutoComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,10 @@ const routes:Routes = [
     
   ],
   providers: [
-    CompeticionService
+    CompeticionService,
+    InstitutoService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })

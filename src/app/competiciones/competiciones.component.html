@@ -1,90 +1,93 @@
-
 <div class="fondoPage">
-<div class="container ">
-  
-  <h2>Eventos</h2>
-  <div class="row">
+  <section>
+  <div class="container my-5">
+    <div class="jumbotron" >
+      <h2>Eventos</h2>
+      <div class="container">
+        <div class="row">
 
-    <div *ngFor="let competicion of competiciones">
-      
-      <div class="card col-6 col-xl-12 col-md-12 fondo" style="width: 17rem;">
-        
-        <div class="card-body">
-          <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
-          <p class="card-text text-center">{{competicion.descripcion}}</p>
-          <div class="row botonesFijos">
-          <button   type="button" name="button" [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
-              class="btn btn-primary espacios">Editar</button>
-            
-              <button   type="button" name="eliminar" (click)="delete(competicion)"
-              class="btn btn-primary espacios">Eliminar</button>
+          <div *ngFor="let competicion of competiciones">
+
+            <div class="card col-6 col-xl-12 col-md-12 fondo" style="width: 19rem;">
+              <div class="card-body">
+                <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
+                <p class="card-text text-center">{{competicion.descripcion}}</p>
+                <div class="row botonesFijos " *ngIf="this.loginService.isAuthenticated()">
+                  <button type="button" name="button"
+                    [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
+                    class="btn btn-primary espacios">Editar</button>
+
+                  <button type="button" name="eliminar" (click)="delete(competicion)"
+                    class="btn btn-primary espacios">Eliminar</button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
       </div>
-    
+    </div>
+  
   </div>
-  </div>
-</div>
 
+</section> 
+  <div class="card border-primary mb-3 d-none">
+    <div class="card-header">Competiciones</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Listado de competiciones</h5>
+      <div class="my-2 text-left">
+      </div>
 
-<div class="card border-primary mb-3 d-none">
-  <div class="card-header">Competiciones</div>
-  <div class="card-body text-primary">
-    <h5 class="card-title">Listado de competiciones</h5>
-    <div class="my-2 text-left">
-    </div>
+      <div *ngIf="competiciones?.length == 0" class="alert alert-info">
+        No hay registros en la base de datos
+      </div>
 
-    <div *ngIf="competiciones?.length == 0" class="alert alert-info">
-      No hay registros en la base de datos
-    </div>
+      <div class="my-2 text-left d-none">
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="[ '/competiciones/form']">Crear
+          evento</button>
+      </div>
 
-    <div class="my-2 text-left d-none">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="[ '/competiciones/form']">Crear
-        evento</button>
-    </div>
+      <table class="table table-bordered table-striped d-none" *ngIf="competiciones?.length>0">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Descripcion </th>
+            <th>plazas</th>
+            <th>lugar del evento</th>
+            <th>dificultad</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
 
-    <table class="table table-bordered table-striped d-none" *ngIf="competiciones?.length>0">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Nombre</th>
-          <th>Descripcion </th>
-          <th>plazas</th>
-          <th>lugar del evento</th>
-          <th>dificultad</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
+          <tr *ngFor="let competicion of competiciones">
+            <td>{{competicion.idCompeticion}}</td>
+            <td>{{competicion.nombreCompeticion}}</td>
+            <td>{{competicion.descripcion}}</td>
+            <td>{{competicion.plazas}}</td>
+            <td>{{competicion.lugarEvento }}</td>
+            <td>{{competicion.dificultad }}</td>
+            <td>
+              <button type="button" name="button" [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
+                class="btn btn-primary">Editar</button>
+            </td>
+            <td>
+              <button type="button" name="eliminar" (click)="delete(competicion)"
+                class="btn btn-primary">Eliminar</button>
+            </td>
 
-        </tr>
-      </thead>
-      <tbody>
-        <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
-        <tr *ngFor="let competicion of competiciones">
-          <td>{{competicion.idCompeticion}}</td>
-          <td>{{competicion.nombreCompeticion}}</td>
-          <td>{{competicion.descripcion}}</td>
-          <td>{{competicion.plazas}}</td>
-          <td>{{competicion.lugarEvento }}</td>
-          <td>{{competicion.dificultad }}</td>
-          <td>
-            <button type="button" name="button" [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
-              class="btn btn-primary">Editar</button>
-          </td>
-          <td>
-            <button type="button" name="eliminar" (click)="delete(competicion)"
-              class="btn btn-primary">Eliminar</button>
-          </td>
+          </tr>
+        </tbody>
 
-        </tr>
-      </tbody>
-
-    </table>
-    <!--[paginador] es el nombre que le damos al atributo en el componente paginador
+      </table>
+      <!--[paginador] es el nombre que le damos al atributo en el componente paginador
      y el ='' 
     se le inyecta al atributo en el hijo
   El de la clase padre se inyecta en el de la clase hijo
 si el paginador existe en el padre, se le inyecta al hijo
     <app-paginator *ngIf="paginador" [paginador]="paginador" ></app-paginator>-->
+    </div>
   </div>
-</div>
 </div>

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private _usuario : Usuario;
-  private _token : string;
+  private _usuario: Usuario;
+  private _token: string;
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -32,10 +32,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(usuario:Usuario):Observable<any>{
+  login(usuario: Usuario): Observable<any> {
     const urlEndpoint = 'http://localhost:8080/oauth/token';
 
-    const credenciales = btoa('angularapp'+':'+'12345');
+    const credenciales = btoa('angularapp' + ':' + '12345');
 
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -45,9 +45,9 @@ export class LoginService {
     let params = new URLSearchParams();
     params.set('grant_type', 'password');
     params.set('username', usuario.nombreUsuario);
-    params.set('password',usuario.password);
+    params.set('password', usuario.password);
 
-    return this.http.post<any>(urlEndpoint, params.toString(), {headers: httpHeaders});
+    return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
   }
 
   obtenerDatosToken(accessToken: string): any {
@@ -60,33 +60,36 @@ export class LoginService {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
   }
-  
+
   guardarUsuario(accessToken: string): void {
     let payload = this.obtenerDatosToken(accessToken);
     this._usuario = new Usuario();
     this._usuario.nombreUsuario = payload.user_name;
-    
+    this._usuario.roles = payload.authorities;
+
+    console.log("Voy a mostrar el usuario : " + this._usuario);
+
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
-  isAuthenticated() : boolean {
+  isAuthenticated(): boolean {
     let payload = this.obtenerDatosToken(this.token);
-    if(payload != null && payload.user_name && payload.user_name.length > 0){
+    if (payload != null && payload.user_name && payload.user_name.length > 0) {
       return true;
     }
     return false;
   }
 
   hasRole(role: string): boolean {
-    if (this.usuario.roles.includes(role)) {
+    if (this.usuario.roles.indexOf(role)) {
       return true;
     }
     return false;
   }
 
-  logout() : void {
-    this._token=null;
-    this._usuario=null;
+  logout(): void {
+    this._token = null;
+    this._usuario = null;
     sessionStorage.clear();
   }
 }
