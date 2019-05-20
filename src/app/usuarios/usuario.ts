@@ -1,3 +1,5 @@
+import { Instituto } from '../institutos/instituto';
+
 export class Usuario {
     idUsuario : number;
 	
@@ -10,6 +12,8 @@ export class Usuario {
 	password : string;
 	
 	emailUsuario : string;
+
+	instituto : Instituto;
 
 	roles: string[] = [];
 
