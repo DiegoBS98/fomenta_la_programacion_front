@@ -17,17 +17,17 @@ export class RoleGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.loginService.isAuthenticated())
-      {
+      if (!this.loginService.isAuthenticated()) {
         this.router.navigate(['/login']);
         return false;
       }
+  
       let role = next.data['role'] as string;
       console.log(role);
-       if(this.loginService.hasRole(role)){
-          return true; 
-       }
-      Swal.fire('Acceso Denegado', `Hola ${this.loginService.usuario.nombreUsuario} no tienes acceso a este recurso `, 'warning')
+      if (this.loginService.hasRole(role)) {
+        return true;
+      }
+      Swal.fire('Acceso denegado', `Holassaa ${this.loginService.usuario.nombreUsuario} no tienes acceso a este recurso!`, 'warning');
       this.router.navigate(['/competiciones']);
       return false;
   }

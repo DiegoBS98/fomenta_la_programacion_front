@@ -26,11 +26,11 @@ const routes:Routes = [
   {path: '', redirectTo: '/competiciones', pathMatch: 'full'},
   {path: 'institutos', component: InstitutosComponent},
   {path: 'competiciones', component: CompeticionesComponent},
-  {path: 'competiciones/form', component: FormCompeticionComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
-  {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
-  {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'competiciones/form', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [ RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'institutos/form/:id', component: FormInstitutoComponent, canActivate: [AutenticacionGuard, RoleGuard],data: {role: 'ROLE_ADMIN'} }
+  {path: 'institutos/form/:id', component: FormInstitutoComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'} }
 ];
 
 @NgModule({

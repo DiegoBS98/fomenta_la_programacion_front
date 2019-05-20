@@ -81,7 +81,7 @@ export class LoginService {
   }
 
   hasRole(role: string): boolean {
-    if (this.usuario.roles.indexOf(role)) {
+    if (this.usuario.roles.includes(role)) {
       return true;
     }
     return false;
