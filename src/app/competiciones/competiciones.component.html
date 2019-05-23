@@ -1,35 +1,90 @@
 <div class="fondoPage">
   <section>
-  <div class="container my-5">
-    <div class="jumbotron" >
-      <h2>Eventos</h2>
-      <div class="container">
-        <div class="row">
+    <!-- card-->
+    
+    <!--Fin de card-->
+    
+    <div class="container my-5">
+      <div class="jumbotron">
 
-          <div *ngFor="let competicion of competiciones">
+        <h2>Estos son los eventos disponibles en los que podreis participar ¡No dudéis en hacerlo!</h2>
+        <div class="container">
+          <div class="row">
 
-            <div class="card col-6 col-xl-12 col-md-12 fondo" style="width: 19rem;">
-              <div class="card-body">
-                <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
-                <p class="card-text text-center">{{competicion.descripcion}}</p>
-                <div class="row botonesFijos " *ngIf="this.loginService.isAuthenticated()">
-                  <button type="button" name="button"
-                    [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
-                    class="btn btn-primary espacios">Editar</button>
+            <div *ngFor="let competicion of competiciones">
 
-                  <button type="button" name="eliminar" (click)="delete(competicion)"
-                    class="btn btn-primary espacios">Eliminar</button>
+
+              <!-- 
+              <div class="maincontainer">
+
+                <div class="card col-6 col-xl-12 col-md-12 fondo thecard" style="width: 19rem;">
+                  <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap">
+                  <div class="card-body card">
+                    <div class="thefront card-text">
+                      <h1>Front of Card</h1>
+                      <p>This is the front of the card. It contains important information. Please see overleaf for more
+                        details.</p>
+                    </div>
+
+                    <div class="theback card-text">
+                      <h1>Back of Card</h1>
+                      <p>Your use of this site is subject to the terms and conditions governing this and all
+                        transactions.</p>
+                      <button>Submit</button>
+                    </div>
+                  </div>
                 </div>
               </div>
+              card -->
+              <!--Fin de card-->
+
+
+              
+              <div class="card  fondo" style="width: 19rem;">
+                    
+                  
+                    <div class="backcard">
+                        <p class="card-text text-center">{{competicion.descripcion}}, {{competicion.descripcion}}</p>
+                      <div class="row botonesFijos" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+                        
+                        <button type="button" name="actualizar"
+                        [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
+                        class="btn btn-primary espacios">Editar</button>
+  
+                        <button type="button" name="eliminar" (click)="delete(competicion)"
+                          class="btn btn-primary espacios">Eliminar</button>
+                      </div>
+                      <div class="row botonesFijos "
+                        *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
+                        <button type="button" name="registrar" class="btn btn-primary espacios"> Registrar</button>
+                      </div>
+                      
+                    </div>
+                  <div class="frontcard">          
+                    <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap">
+                    <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
+                    <p class="card-text text-center">{{competicion.plazas}}</p>
+                    <p class="card-text text-center">{{competicion.lugarEvento}}</p>
+                    <p class="card-text text-center">{{competicion.dificultad}}</p>
+                    
+                  </div>
+
+                  
+                  
+                
+              </div>
+
+            
             </div>
           </div>
         </div>
       </div>
-    </div>
-  
-  </div>
 
-</section> 
+    </div>
+
+  </section>
+
+
   <div class="card border-primary mb-3 d-none">
     <div class="card-header">Competiciones</div>
     <div class="card-body text-primary">

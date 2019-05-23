@@ -1,8 +1,38 @@
 .card{
-    
     margin-left: 36px;
-    justify-content: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
+
+
 }
+
+
+.card:hover{
+
+    transform: rotateY(180deg);
+  }
+
+  .frontcard{
+
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    overflow: hidden;
+  
+  }
+
+
+  .backcard{
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;  
+    backface-visibility: hidden;
+    overflow: hidden;
+    transform: rotateY(180deg);
+
+  }
 
 .fondo {
     background-image: linear-gradient(-90deg, #45526E, #8497b5);
@@ -11,8 +41,11 @@
     margin-bottom: 20%;
 }
 
+.position {
+  position: absolute
+}
+
 .botonesFijos{
-    
     height: 80px;
     text-align: center;
     margin: auto;
@@ -22,12 +55,13 @@
 }
 .espacios{
     background-image: linear-gradient(-90deg, #08090b, #12292b);
-
     margin:auto;
     margin-left: 1px;
     background-color: #12292b;
     border: #12292b;
     width: 150px;
     margin-top: 10px;
+    vertical-align: auto;
+    position: relative;
 }
         

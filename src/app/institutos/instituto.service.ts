@@ -5,6 +5,7 @@ import { catchError} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router'
+import { LoginService } from '../usuarios/login.service';
 
 
 @Injectable({
@@ -15,8 +16,37 @@ export class InstitutoService {
 
   urlBack : string = 'http://localhost:8080/institutos';
   constructor(private http: HttpClient,
-    private router : Router) { }
-  getInstitutos():Observable<Instituto[]>{
+    private router : Router,
+    private loginService : LoginService) { }
+ 
+    isNoAutorizado(e): boolean{
+      if(e.status==401){
+        /**Para que la sesion expire cuando el token haya caducado.. */ 
+        if(this.loginService.isAuthenticated()){
+            this.loginService.logout();
+            this.router.navigate(['/login']);
+            return true;
+          }
+      }
+      if(e.status==403){
+        this.router.navigate(['/competiciones']);
+        swal.fire('Permisos', 'No tiene suficientes permisos para realizar esta accion', 'warning')
+        return true;
+      }
+      return false;
+    }
+
+    private agregarAuthorizationHeader(){
+      //Conseguimos el token
+      let token = this.loginService.token;
+      if(token != null){
+        return this.httpHeader.append('Authorization', 'Bearer' + token)
+      }
+      return this.httpHeader;
+    }
+ 
+ 
+   getInstitutos():Observable<Instituto[]>{
     /**
      * Creamos el flujo con los datos que nos llegan para poder devovlerlos como observable
      */

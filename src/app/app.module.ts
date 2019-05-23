@@ -19,6 +19,7 @@ import{TokenInterceptor} from './usuarios/interceptores/token.interceptor'
 import { InstitutoService } from './institutos/instituto.service';
 
 
+
 /**
  * Creamos constante con array de rutas
  */

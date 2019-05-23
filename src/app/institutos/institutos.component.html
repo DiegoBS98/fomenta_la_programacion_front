@@ -1,4 +1,50 @@
-<div class="card border-primary mb-3" >
+<div class="fondoPage">
+  <section>
+    <div class="container my-5">
+      <div class="jumbotron">
+        <h2>Estos son los institutos que participaran en nuestras competiciones</h2>
+        <div class="container">
+          <div class="row">
+
+            <div *ngFor="let instituto of institutos">
+
+              <div class="card col-6 col-xl-12 col-md-12 fondo" style="width: 19rem;">
+                <div class="card-body">
+                  <div class="frontcard">
+                    <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap">
+                    <h4 class="card-title text-center ">{{instituto.nombre}}</h4>
+                    <p class="card-text text-center">{{instituto.localizacion}}</p>
+                    <p class="card-text text-center">{{instituto.email_contacto}}</p>
+                  </div>
+                  <div class="backcard">
+                    <div class="row botonesFijos "
+                      *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+                      <button type="button" name="button"
+                        [routerLink]="[ '/institutos/form', instituto.id_instituto ]"
+                        class="btn btn-primary espacios">Editar</button>
+
+                      <button type="button" name="eliminar" (click)="delete(instituto)"
+                        class="btn btn-primary espacios">Eliminar</button>
+                    </div>
+                    <div class="row botonesFijos "
+                      *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
+                      <button type="button" name="registrar" class="btn btn-primary espacios"> Registrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+<div class="card border-primary mb-3 d-none" >
   <div class="card-header">institutos</div>
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de institutos</h5>

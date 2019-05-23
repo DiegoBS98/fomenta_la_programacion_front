@@ -3,9 +3,9 @@
 
   <img src="../assets/images/madridestrellas.png" width="80" height="40" alt="Imagen de Bandera de Comunidad de Madrid">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <button class="navbar-toggler" style="background-color: orange;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon" style="color: white"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -22,13 +22,13 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <div class="row botonesFijos">
           <button *ngIf="!this.loginService.isAuthenticated()" type="button" name="button" [routerLink]="['/login']"
-              class="btn btn-primary espacios">Login</button>
+              class="btn  espacios">Login</button>
               <div *ngIf="this.loginService.isAuthenticated()" class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-primary espacios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{loginService.usuario.nombreUsuario}}
                 </button>
                 <div class="dropdown-menu">
-                  <button  (click)="logout()" type="button" class="btn btn-outline dropdown-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button  (click)="logout()" type="button" class="btn btn-outline dropdown-item" style="width: 50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Cerrar Sesión
                   </button>
               </div>
@@ -36,8 +36,7 @@
           </div>
     </form>
   </div>
-</nav>
-
+  </nav>
 <!--<div id="carouselExampleSlidesOnly" class="carousel slide" style="height: 00px" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">

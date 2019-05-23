@@ -84,7 +84,6 @@ export class CompeticionService {
         swa1.fire('Error al crear', e.error.error, 'error');
         return throwError(e);
       }
-
       )
     )
   }

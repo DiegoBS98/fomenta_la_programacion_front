@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Instituto} from './instituto';
 import {InstitutoService} from './instituto.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../usuarios/login.service';
 @Component({
   selector: 'app-institutos',
   templateUrl: './institutos.component.html',
@@ -10,7 +11,8 @@ import Swal from 'sweetalert2';
 export class InstitutosComponent implements OnInit {
   
   institutos : Instituto[];
-  constructor(private institutoService : InstitutoService) { }
+  constructor(private institutoService : InstitutoService,
+    private loginService : LoginService) { }
 
   ngOnInit() {
     this.institutoService.getInstitutos().subscribe(
