@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
   dialogflow: {
-    EventosAtosBot : '50f823badbc34f68b40958028a027752'
+    ATCAdmin : 'c32816e222c9433faaecddf85d5f4179'
   }
 };
 

@@ -17,6 +17,8 @@ import { AutenticacionGuard } from './usuarios/guards/autenticacion.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
 import{TokenInterceptor} from './usuarios/interceptores/token.interceptor'
 import { InstitutoService } from './institutos/instituto.service';
+import { ChatbotModule } from './chatbot/chatbot.module';
+import { ChatbotService } from './chatbot/chatbot.service';
 
 
 
@@ -31,6 +33,7 @@ const routes:Routes = [
   {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [ RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
+  {path: 'chat', component: ChatbotModule},
   {path: 'institutos/form/:id', component: FormInstitutoComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'} }
 ];
 
@@ -43,11 +46,12 @@ const routes:Routes = [
     InstitutosComponent,
     FormCompeticionComponent,
     FormInstitutoComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ChatbotModule,
     FormsModule,
     RouterModule.forRoot(routes)
     
