@@ -29,6 +29,7 @@ const routes:Routes = [
   {path: '', redirectTo: '/competiciones', pathMatch: 'full'},
   {path: 'institutos', component: InstitutosComponent},
   {path: 'competiciones', component: CompeticionesComponent},
+  {path: 'competiciones/page/:page', component: CompeticionesComponent},
   {path: 'competiciones/form', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [ RoleGuard],data: {role: 'ROLE_ADMIN'}},

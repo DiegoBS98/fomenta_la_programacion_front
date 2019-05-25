@@ -1,18 +1,27 @@
-<h1>Angular Bot</h1>
+<div class="mensajes" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+  <button type="button" *ngIf="mostrar==true" class="btn boton my-1" data-toggle="collapse"
+    data-target="#demo" (click)="ocultar()">¿Necesitas ayuda?</button>
+    <button type="button" *ngIf="mostrar==false" class="btn boton my-1" data-toggle="collapse"
+    data-target="#demo" (click)="ocultar()" >X</button>
+  <div id="demo" class="collapse ">
 
-<ng-container *ngFor="let message of messages | async">
+    <div id="prueba" class="agrupar">
 
-  <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+      <ng-container *ngFor="let message of messages | async">
+
+        <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
                                     'to':   message.sentBy === 'user' }">
-    {{ message.content }}
+          {{ message.content }}
+        </div>
+
+      </ng-container>
+
+    </div>
+    <div class="row">
+    <label for="nameField"> </label>
+
+    <input [(ngModel)]="formValue" class="form-control col-sm-8 mx-2"  (keyup.enter)="sendMessage()" type="text" placeholder="Escribe...">
+    <button (click)="sendMessage()" class="btn boton  col-sm-3" aria->Enviar</button>
+    </div>
   </div>
-
-</ng-container>
-
-
-<label for="nameField">Your Message</label>
-
-
-<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
-
-<button (click)="sendMessage()">Send</button>
+</div>

@@ -4,7 +4,24 @@
     padding: 15px 20px;
     position: relative;
     font-weight: bold;
+    font-size: 14px;
 }
+.botonAyuda{
+    position: fixed;
+    right: 0;
+    top: 100px;
+
+}
+.mensajes {
+    
+    width: auto;
+    position: fixed;
+    right: 0;    position: fixed;
+    top: 100px;
+    right: 0;
+  }
+  
+
 .message.to {
     background-color: #2095FE;
     color: #fff;
@@ -21,3 +38,30 @@
 .message.from + .message.from {
 margin-top: -10px;
 }
+
+.agrupar{
+    max-height: 300px;
+    max-width:  300px;
+    overflow: auto ;
+    
+  }
+  .boton {
+    color: #fff;
+    background-color: #f0ad4e;
+    display: inline-block;
+   
+}
+
+.boton{
+
+}
+
+  div.mensajes {
+    margin: 0 1% 0 0%;
+    padding: 1%;
+    background-color: #ffffff;
+    border-width: 0.2em;
+    border-radius: 2em;
+    box-shadow: 2px 2px 5px hsl(234, 92%, 65%);
+
+  }

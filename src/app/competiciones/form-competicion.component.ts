@@ -53,7 +53,7 @@ export class FormCompeticionComponent implements OnInit {
      .subscribe(
        competicion => {
          this.router.navigate(['/competiciones'])
-         Swa1.fire('Nuevo evento', `Evento ${competicion.nombreCompeticion} creado con exito`, 'success')
+         Swa1.fire('Nuevo evento', `Evento  creado con exito`, 'success')
        },
        err => {
          this.errores = err.error.errores as string[];

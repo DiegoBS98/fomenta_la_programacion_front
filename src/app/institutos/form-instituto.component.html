@@ -1,61 +1,79 @@
-<ul class="alert alert-danger" *ngIf="errores?.length > 0">
-    <li *ngFor="let err of errores">
-      {{ err }}
-    </li>
-  </ul>
-<div class="card bg-dark text-white">
-  <div>{{ titulo }}</div>
-  <div class="card-body">
-    <form>
-      <!--Nombre-->
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2" >Nombre del instituto</label>
-        <div class="col-sm-12">
-          <input type="text" class="form-control" name="nombre" [(ngModel)]="instituto.nombre"/>
-        </div>
-      </div>
-      <!--CIF --> 
-      <div class="form-group row">
-        <label for="cif" class="col-form-label col-sm-2">CIF</label>
-        <div class="col-sm-12">
-          <input type="text" name="cif" [(ngModel)]="instituto.cif_instituto">
-        </div>
-      </div>
 
-      <!--Localización--> 
-      <div class="form-group row">
-        <label for="localizacion" class="col-form-label col-sm-2">Dirección del instituto</label>
-        <div class="col-sm-12"> 
-          <input type="text" class="form-control" name="localizacion" [(ngModel)]="instituto.localizacion">
-        </div>
+
+
+<!--  -->
+
+<div class="container">
+
+  <div class="login-form">
+    <div class="main-div">
+      <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+        <li *ngFor="let err of errores">
+          {{ err }}
+        </li>
+      </ul>
+      <div class="panel">
+        <h2>Crear Instituto</h2>
+        <p>No olvide introducir todos los datos</p>
       </div>
+      <hr>
+            <form id="Login">
 
-      <!-- Telefono-contacto--> 
-      <div class="form-group row">
-        <label for="tlf" class="col-form-label col-sm-2">Teléfono de contacto</label>
-        <div class="col-sm-12">
-          <input type="text" class="form-control" [(ngModel)]="instituto.telefono_contacto" name="tlf">
-        </div>
-      </div>
+              <!--Nombre-->
+              <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-12"></label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" name="nombre" [(ngModel)]="instituto.nombre" placeholder="Nombre" />
+                </div>
+              </div>
+              <!--CIF -->
+              <div class="form-group row">
+                <label for="cif" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" name="cif" [(ngModel)]="instituto.cif_instituto" placeholder="CIF">
+                </div>
+              </div>
 
-      <!-- email-contacto --> 
-      <div class="form-group row">
-        <label for="email" class="col-form-label col-sm-2">Email de contacto</label>
-        <div class="col-sm-12">
-          <input type="email" name="email" [(ngModel)]="instituto.email_contacto">
-        </div>
-      </div>
+              <!--Localización-->
+              <div class="form-group row">
+                <label for="localizacion" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" name="localizacion" [(ngModel)]="instituto.localizacion" placeholder="Localización del instituto">
+                </div>
+              </div>
 
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <button class="btn btn-primary" role="button"  *ngIf="!instituto.id_instituto else bloqueElse" (click)="create()">Añadir</button>
+              <!-- Telefono-contacto-->
+              <div class="form-group row">
+                <label for="tlf" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" [(ngModel)]="instituto.telefono_contacto" name="tlf" placeholder="Teléfono de contacto">
+                </div>
+              </div>
 
-          <ng-template #bloqueElse>
-            <button class="btn btn-primary" role="button"  (click)="update()">Editar</button>
-          </ng-template>
+              <!-- email-contacto -->
+              <div class="form-group row">
+                <label for="email" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-12">
+                  <input type="email" name="email" class="form-control" [(ngModel)]="instituto.email_contacto" placeholder="Email de contacto">
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-primary" role="button" *ngIf="!instituto.id_instituto else bloqueElse"
+                      (click)="create()">Añadir</button>
           
-        </div>
-      </div>
-    </form>
+                    <ng-template #bloqueElse>
+                      <button class="btn btn-primary" role="button" (click)="update()">Editar</button>
+                    </ng-template>
+          
+                  </div>
+                </div>
+
+            </form>
+          
+      
+    </div>
   </div>
 </div>

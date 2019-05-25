@@ -16,7 +16,13 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink='/institutos'>INSTITUTOS</a>
       </li>
-
+      <li class="nav-item" routerLinkActive="active" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')" >
+        <a class="nav-link" routerLink='/competiciones/form'>CREAR EVENTO</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')" >
+          <a class="nav-link" routerLink='/institutos/form'>CREAR INSTITUTO</a>
+        </li>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

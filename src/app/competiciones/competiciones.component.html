@@ -44,9 +44,12 @@
                     
                   
                     <div class="backcard">
-                        <p class="card-text text-center">{{competicion.descripcion}}, {{competicion.descripcion}}</p>
-                      <div class="row botonesFijos" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
                         
+                        <div *ngIf="!this.loginService.isAuthenticated()">
+                        <p class="card-text">Si quieres participar contacta con tu instituto para que te de de alta</p>
+                      </div>
+                      <div class="row botonesFijos" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+                          <p class="card-text">{{competicion.descripcion}}</p>
                         <button type="button" name="actualizar"
                         [routerLink]="[ '/competiciones/form', competicion.idCompeticion ]"
                         class="btn btn-primary espacios">Editar</button>
@@ -56,7 +59,9 @@
                       </div>
                       <div class="row botonesFijos "
                         *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
+                        <p class="card-text">{{competicion.descripcion}}</p>
                         <button type="button" name="registrar" class="btn btn-primary espacios"> Registrar</button>
+
                       </div>
                       
                     </div>
@@ -65,7 +70,7 @@
                     <h4 class="card-title text-center ">{{competicion.nombreCompeticion}}</h4>
                     <p class="card-text text-center">{{competicion.plazas}}</p>
                     <p class="card-text text-center">{{competicion.lugarEvento}}</p>
-                    <p class="card-text text-center">{{competicion.dificultad}}</p>
+                    <p class="card-text text-center">Dificultad : {{competicion.dificultad}}</p>
                     
                   </div>
 

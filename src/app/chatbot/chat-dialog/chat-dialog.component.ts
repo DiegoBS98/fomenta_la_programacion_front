@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatbotService, Message } from '../chatbot.service';
 import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
+import { LoginService } from 'src/app/usuarios/login.service';
 
 
 @Component({
@@ -13,9 +14,10 @@ export class ChatDialogComponent implements OnInit {
   
   messages: Observable<Message[]>;
   formValue: string;
+  mostrar : boolean = true;
 
-
-  constructor(public chatbotService : ChatbotService) { }
+  constructor(public chatbotService : ChatbotService,
+    public loginService : LoginService) { }
 
   ngOnInit() {
     this.messages = this.chatbotService.conversation.asObservable().pipe( 
@@ -25,6 +27,22 @@ export class ChatDialogComponent implements OnInit {
   sendMessage() {
     this.chatbotService.converse(this.formValue);
     this.formValue = '';
+    this.bajarBarra();
+    
   }
+
+  bajarBarra(){
+    var objDiv = document.getElementById("prueba");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+ocultar(){
+  if(this.mostrar){
+  this.mostrar= false;
+}
+else{
+  this.mostrar=true;
+}
+}
 
 }
