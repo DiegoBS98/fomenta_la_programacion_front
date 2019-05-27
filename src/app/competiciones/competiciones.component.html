@@ -73,7 +73,9 @@
                     <p class="card-text text-center">Dificultad : {{competicion.dificultad}}</p>
                     
                   </div>
-
+                  <button type="button" name="actualizar"
+                  [routerLink]="[ '/competiciones/ver', competicion.idCompeticion ]"
+                  class="btn btn-primary espacios">Editar</button>
                   
                   
                 

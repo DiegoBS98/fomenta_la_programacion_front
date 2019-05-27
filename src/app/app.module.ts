@@ -19,6 +19,7 @@ import{TokenInterceptor} from './usuarios/interceptores/token.interceptor'
 import { InstitutoService } from './institutos/instituto.service';
 import { ChatbotModule } from './chatbot/chatbot.module';
 import { ChatbotService } from './chatbot/chatbot.service';
+import { DetalleComponent } from './competiciones/detalle/detalle.component';
 
 
 
@@ -32,6 +33,7 @@ const routes:Routes = [
   {path: 'competiciones/page/:page', component: CompeticionesComponent},
   {path: 'competiciones/form', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'competiciones/form/:id', component: FormCompeticionComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
+  {path: 'competiciones/ver/:id', component: DetalleComponent, canActivate: [RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'institutos/form', component: FormInstitutoComponent, canActivate: [ RoleGuard],data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
   {path: 'chat', component: ChatbotModule},
@@ -47,7 +49,8 @@ const routes:Routes = [
     InstitutosComponent,
     FormCompeticionComponent,
     FormInstitutoComponent,
-    LoginComponent
+    LoginComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
