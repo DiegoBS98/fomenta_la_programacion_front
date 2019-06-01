@@ -6,6 +6,6 @@ export class Competicion {
     plazas : number;
     lugarEvento : string;
     dificultad : number;
-    foto  :string;
+    foto : string;
 
 }

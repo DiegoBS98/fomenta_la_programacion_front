@@ -5,7 +5,7 @@
     data-target="#demo" (click)="ocultar()" >X</button>
   <div id="demo" class="collapse ">
 
-    <div id="prueba" class="agrupar">
+    <div #scrollMe id="prueba" class="agrupar">
 
       <ng-container *ngFor="let message of messages | async">
 

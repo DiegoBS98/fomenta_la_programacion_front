@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatbotService, Message } from '../chatbot.service';
 import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
@@ -11,7 +11,9 @@ import { LoginService } from 'src/app/usuarios/login.service';
   styleUrls: ['./chat-dialog.component.css']
 })
 export class ChatDialogComponent implements OnInit {
-  
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+
   messages: Observable<Message[]>;
   formValue: string;
   mostrar : boolean = true;
@@ -43,6 +45,15 @@ ocultar(){
 else{
   this.mostrar=true;
 }
+}
+ngAfterViewChecked() {
+  this.scrollToBottom();
+}
+
+scrollToBottom(): void {
+  try {
+    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  } catch (err) { }
 }
 
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Input } from '@angular/core';
 import { Competicion } from './competicion'
 import { of, Observable, throwError } from 'rxjs';
 import { catchError, map} from 'rxjs/operators';
@@ -13,7 +13,6 @@ import { LoginService } from '../usuarios/login.service';
 export class CompeticionService {
 
   private httpHeader: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-
   private url:string ='/src/app/usuarios/login.component.html';
   /**
    * 
@@ -69,7 +68,7 @@ export class CompeticionService {
   }
 
   create(competicion: Competicion): Observable<Competicion> {
-    return this.http.post(this.urlBack, competicion).pipe(
+    return this.http.post(this.urlBack, competicion,{ headers: this.agregarAuthorizationHeader() }).pipe(
       map((response : any) => response.competicion as Competicion),
       catchError( e => {
         if(this.isNoAutorizado(e)){
@@ -106,25 +105,23 @@ export class CompeticionService {
     )
   }
 
-  public update(competicion: Competicion): Observable<any> {
-    return this.http.put<any>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, {headers : this.agregarAuthorizationHeader() }).pipe(
-      map((response : any) => response.competicion as Competicion),
-      catchError( e => {
-        if(this.isNoAutorizado(e)==true){
+  update(competicion: Competicion): Observable<any> {
+    return this.http.put<any>(`${this.urlBack}/${competicion.idCompeticion}`, competicion, { headers: this.agregarAuthorizationHeader() }).pipe(
+      catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
           return throwError(e);
         }
 
-        if(e.status == 400){
+        if (e.status == 400) {
           return throwError(e);
         }
 
         console.error(e.error.mensaje);
-        swa1.fire('Error al ACTUALIZAR', e.error.error, 'error');
+        swa1.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
-      }
-
-      )
-    )
+      })
+    );
   }
 
   delete(id : number) : Observable<Competicion>{
@@ -154,12 +151,26 @@ export class CompeticionService {
     const req = new HttpRequest('POST', `${this.urlBack}/upload`, formData, {
       reportProgress: true
     });
+    
 
     return this.http.request(req);
 
   }
 
 
+  registrarEnEvento(idUsuario, idCompeticion) : Observable<any>{
+    
+      console.log('Funcion del servicio: id usuario '+idUsuario+' Competicion'+idCompeticion);
+      
+      return this.http.post<any>(
+        `${this.urlBack}/${idCompeticion}/${idUsuario}`, { headers: this.agregarAuthorizationHeader() }
+      ).pipe(
+        catchError(e=>{
+          swa1.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
 
 
 } 

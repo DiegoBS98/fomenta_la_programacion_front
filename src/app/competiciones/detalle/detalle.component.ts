@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Competicion } from '../competicion';
 import { CompeticionService } from '../competicion.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-detalle',
@@ -11,11 +12,13 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./detalle.component.css']
 })
 export class DetalleComponent implements OnInit {
-  competicion : Competicion;
+  @Input() competicion : Competicion;  
+  
   private fotoSeleccionada : File;
   progreso: number = 0;
   constructor(private competicionService : CompeticionService,
-    private activatedRoute : ActivatedRoute) { }
+    private activatedRoute : ActivatedRoute,
+    private modalService : ModalService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -57,17 +60,25 @@ export class DetalleComponent implements OnInit {
     } else {
       this.competicionService.subirFoto(this.fotoSeleccionada, this.competicion.idCompeticion)
         .subscribe(event => {
+          //Si el evento esta en curso, calculamos porcentaje
           if (event.type === HttpEventType.UploadProgress) {
             this.progreso = Math.round((event.loaded / event.total) * 100);
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
             this.competicion = response.competicion as Competicion;
+            this.modalService.notificarUpload.emit(this.competicion);
             Swal.fire('La foto se ha subido completamente!', response.mensaje, 'success');
             //this.rout
           }
         });
     }
   }
+
+  cerrarModal(){
+    this.modalService.cerrarModal();
+    this.fotoSeleccionada = null;
+    this.progreso = 0;
+    }
 
 
 }

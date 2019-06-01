@@ -66,6 +66,7 @@ export class LoginService {
     this._usuario = new Usuario();
     this._usuario.nombreUsuario = payload.user_name;
     this._usuario.roles = payload.authorities;
+    this._usuario.idUsuario = payload.idUsuario;
 
     console.log("Voy a mostrar el usuario : " + this._usuario);
 

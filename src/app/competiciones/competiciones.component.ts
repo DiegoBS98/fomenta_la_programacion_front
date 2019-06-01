@@ -3,8 +3,7 @@ import { Competicion } from './competicion';
 import { CompeticionService } from './competicion.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../usuarios/login.service';
-
-
+import {ModalService} from './detalle/modal.service';
 
 
 
@@ -16,10 +15,11 @@ import { LoginService } from '../usuarios/login.service';
 
 
 export class CompeticionesComponent implements OnInit {
-
+  competicionSeleccionada : Competicion;
   competiciones: Competicion[];
 
-  constructor(private competicionService: CompeticionService, private loginService: LoginService) { }
+  constructor(private competicionService: CompeticionService, private loginService: LoginService,
+    private modalService : ModalService) { }
 
   ngOnInit() {
     this.competicionService.getCompeticiones().subscribe(
@@ -27,6 +27,11 @@ export class CompeticionesComponent implements OnInit {
     );
   }
 
+  registrarEnEvento(competicion : Competicion){
+    console.log(competicion.idCompeticion);
+    console.log(this.loginService.usuario.idUsuario);
+    this.competicionService.registrarEnEvento(this.loginService.usuario.idUsuario, competicion.idCompeticion);
+  }
   
 
 
@@ -88,6 +93,11 @@ export class CompeticionesComponent implements OnInit {
         )
       }
     })
+  }
+
+  abrirModal(competicion :Competicion): any{
+    this.competicionSeleccionada = competicion;
+    this.modalService.abrirModal()
   }
 
 }
