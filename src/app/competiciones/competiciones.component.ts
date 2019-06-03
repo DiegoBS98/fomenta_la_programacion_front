@@ -4,6 +4,7 @@ import { CompeticionService } from './competicion.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../usuarios/login.service';
 import {ModalService} from './detalle/modal.service';
+import { Route, Router } from '@angular/router';
 
 
 
@@ -17,9 +18,9 @@ import {ModalService} from './detalle/modal.service';
 export class CompeticionesComponent implements OnInit {
   competicionSeleccionada : Competicion;
   competiciones: Competicion[];
-
+  errores : String[];
   constructor(private competicionService: CompeticionService, private loginService: LoginService,
-    private modalService : ModalService) { }
+    private modalService : ModalService, private router : Router) { }
 
   ngOnInit() {
     this.competicionService.getCompeticiones().subscribe(
@@ -27,10 +28,25 @@ export class CompeticionesComponent implements OnInit {
     );
   }
 
-  registrarEnEvento(competicion : Competicion){
-    console.log(competicion.idCompeticion);
+  registrarEnEvento( competicion : Competicion){
     console.log(this.loginService.usuario.idUsuario);
-    this.competicionService.registrarEnEvento(this.loginService.usuario.idUsuario, competicion.idCompeticion);
+    console.log(competicion.idCompeticion);
+    this.competicionService.registrarEnEvento(this.loginService.usuario.idUsuario, competicion.idCompeticion).subscribe(
+      any => {
+        this.router.navigate([`competiciones`])
+        Swal.fire('Registro Completado', `${this.loginService.usuario.nombreUsuario} te has registrado con exito en el evento ${competicion.idCompeticion}!`, 'success')
+        .then((result) => {
+          location.reload(true);
+        })
+      },
+   err => {
+    
+    this.errores = err.error.errors as string[];
+    
+     console.error('Código del error desde el backend' + err.status);
+   
+   }
+    );
   }
   
 
