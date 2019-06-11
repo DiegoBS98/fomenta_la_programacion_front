@@ -1,12 +1,17 @@
 .card{
-  margin-left: 36px;
+  margin-left: 34px;
   position: relative;
   transform-style: preserve-3d;
   transition: all 0.8s ease;
-
+  width: 19rem;
+  height: 500px
 
 }
 
+.centrarBoton{
+  position: relative;
+  margin:auto !important;
+}
 
 .card:hover{
 
@@ -52,11 +57,11 @@ position: absolute
   
 }
 .espacios{
-  background-image: linear-gradient(-90deg, #08090b, #12292b);
+  background-color: #f0ad4e;
+  ;
   margin:auto;
   margin-left: 1px;
-  background-color: #12292b;
-  border: #12292b;
+  border: #f0ad4e;
   width: 100px;
   margin-top: 10px;
   vertical-align: auto;

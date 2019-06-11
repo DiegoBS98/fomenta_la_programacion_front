@@ -10,15 +10,16 @@
         </div>
         <div class="modal-body">
           <div class="container">
-            <div class="row">
-              <div class="col-sm">
+            <div class="row ">
+              <div style="width: 50%">
+                  <div class="input-group mb-3">
                 <ul *ngIf="competicion" class="list-group text-dark mb-3">
                   <li class="list-group-item active">{{competicion.nombreCompeticion}}</li>
                   <li class="list-group-item">{{competicion.descripcion}}</li>
                   <li class="list-group-item">{{competicion.plazas}}</li>
                 </ul>
 
-                <div class="input-group mb-3">
+                
                   <div class="custom-file">
                     <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input"
                       id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
@@ -29,12 +30,13 @@
                       type="button" id="inputGroupFileAddon04">Subir</button>
                   </div>
                   
-                  <div class="col-sm">
+                  
+
+                </div>
+                <div style="width: 100%">
                     <img *ngIf="competicion?.foto" src="http://localhost:8080/uploads/img/{{competicion.foto}}"
                       alt="{{competicion.foto}}" class="img-thumbnail rounded" style="width: 100px; height: 100px;">
                   </div>
-
-                </div>
                 <div *ngIf="progreso>0" class="progress mb-2" style="height: 40px">
                   <div class="progress-bar progress-bar-striped bg-warning mt-2" role="progressbar"
                     [ngStyle]="{width:progreso+'%'}" attr.aria-valuenow={{progreso}} aria-valuemin="0"

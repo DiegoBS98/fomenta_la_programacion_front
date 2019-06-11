@@ -1,12 +1,16 @@
 .card{
-    margin-left: 36px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: all 0.8s ease;
-
+  margin-left: 34px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.8s ease;
+  width: 19rem;
+  height: 500px
 
 }
-
+.centrarBoton{
+  position: relative;
+  margin:auto !important;
+}
 body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
 
 .form-heading { color:#fff; font-size:23px;}
@@ -105,11 +109,10 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
     
 }
 .espacios{
-    background-image: linear-gradient(-90deg, #08090b, #12292b);
-    margin:auto;
+  background-color: #f0ad4e;
     margin-left: 1px;
-    background-color: #12292b;
-    border: #12292b;
+    
+    border: #f0ad4e;
     width: 100px;
     margin-top: 10px;
     vertical-align: auto;

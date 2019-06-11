@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.loginService.guardarToken(response.access_token);
         let usuario = this.loginService.usuario
         this.router.navigate(['/competiciones']);
-        Swal.fire('Login',` ${usuario.nombreUsuario}Has iniciado sesion con éxito!`, 'success');
+        Swal.fire('Login',` ${usuario.nombreUsuario} Has iniciado sesion con éxito!`, 'success');
       }, err => {
         if (err.status == 400) {
           Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');

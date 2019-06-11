@@ -21,19 +21,24 @@
 
       <!-- Grid column -->
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Competiciones</h6>
-        <p>
-          <a href="#!">MDBootstrap</a>
-        </p>
-        <p>
-          <a href="#!">MDWordPress</a>
-        </p>
-        <p>
-          <a href="#!">BrandFlow</a>
-        </p>
-        <p>
-          <a href="#!">Bootstrap Angular</a>
-        </p>
+        <h6 class="text-uppercase mb-4 font-weight-bold">Menú</h6>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink='/competiciones'>COMPETICIONES</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink='/institutos'>INSTITUTOS</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active"
+              *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+              <a class="nav-link" routerLink='/competiciones/form'>CREAR EVENTO</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active"
+              *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
+              <a class="nav-link" routerLink='/institutos/form'>CREAR INSTITUTO</a>
+            </li>
+      
+          </ul>
       </div>
       <!-- Grid column -->
 

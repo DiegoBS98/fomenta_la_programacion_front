@@ -34,7 +34,7 @@ export class CompeticionesComponent implements OnInit {
     this.competicionService.registrarEnEvento(this.loginService.usuario.idUsuario, competicion.idCompeticion).subscribe(
       any => {
         this.router.navigate([`competiciones`])
-        Swal.fire('Registro Completado', `${this.loginService.usuario.nombreUsuario} te has registrado con exito en el evento ${competicion.idCompeticion}!`, 'success')
+        Swal.fire('Registro Completado', `${this.loginService.usuario.nombreUsuario} te has registrado con éxito en el evento ${competicion.nombreCompeticion}!`, 'success')
         .then((result) => {
           location.reload(true);
         })
@@ -88,7 +88,7 @@ export class CompeticionesComponent implements OnInit {
      )
    }*/
     Swal.fire({
-      title: '¿Seguro que quieres eliminar este cliente?',
+      title: '¿Seguro que quieres eliminar este evento?',
       text: "No podrás gestionarlo una vez eliminado",
       type: 'warning',
       showCancelButton: true,
@@ -101,8 +101,8 @@ export class CompeticionesComponent implements OnInit {
           response => {
             this.competiciones = this.competiciones.filter(cli => cli !== competicion)
             Swal.fire(
-              '¡Cliente Eliminado!',
-              `El cliente ${competicion.nombreCompeticion} ha sido eliminado con exito`,
+              '¡Evento Eliminado!',
+              `El evento ${competicion.nombreCompeticion} ha sido eliminado con exito`,
               'success'
             )
           }

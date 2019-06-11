@@ -1,63 +1,21 @@
 <div class="fondoPage">
-  <section class="d-none">
+  <section>
+    <!-- card-->
+
+    <!--Fin de card-->
+
     <div class="container my-5">
-      <div class="jumbotron">
-        <h2>Estos son los institutos que participaran en nuestras competiciones</h2>
+      <div class="jumbotron align-items-center ">
+        <h1 class="display-4 text-center">INSTITUTOS PARTICIPANTES</h1>
+        <h6 class="text-center">Estos son los institutos que podran participa, si no ves el tuyo contacta con la
+          dirección de tu centro.</h6>
         <div class="container">
           <div class="row">
 
-            <div *ngFor="let instituto of institutos">
+            <div class="col-xs-12 " *ngFor="let instituto of institutos">
 
-              <div class="card col-6 col-xl-12 col-md-12 fondo" style="width: 19rem;">
-                <div class="card-body">
-                  <div class="frontcard">
-                    <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap">
-                    <h4 class="card-title text-center ">{{instituto.nombre}}</h4>
-                    <p class="card-text text-center">{{instituto.localizacion}}</p>
-                    <p class="card-text text-center">{{instituto.email_contacto}}</p>
-                  </div>
-                  <div class="backcard">
-                    <div class="row botonesFijos "
-                      *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
-                      <button type="button" name="button"
-                        [routerLink]="[ '/institutos/form', instituto.id_instituto ]"
-                        class="btn btn-primary espacios">Editar</button>
 
-                      <button type="button" name="eliminar" (click)="delete(instituto)"
-                        class="btn btn-primary espacios">Eliminar</button>
-                    </div>
-                    <div class="row botonesFijos "
-                      *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
-                      <button type="button" name="registrar" class="btn btn-primary espacios"> Registrar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <section>
-      <!-- card-->
-      
-      <!--Fin de card-->
-      
-      <div class="container my-5">
-        <div class="jumbotron">
-  
-          <h2>Estos son los institutos que podreis participar ¡No dudéis en hacerlo!</h2>
-          <div class="container">
-            <div class="row">
-  
-              <div *ngFor="let instituto of institutos">
-  
-  
-                <!-- 
+              <!-- 
                 <div class="maincontainer">
   
                   <div class="card col-6 col-xl-12 col-md-12 fondo thecard" style="width: 19rem;">
@@ -79,112 +37,57 @@
                   </div>
                 </div>
                 card -->
-                <!--Fin de card-->
-  
-  
-                
-                <div class="card  fondo" style="width: 19rem;">
-                      
+              <!--Fin de card-->
+
+
+
+              <div class="card  col-xs-12 fondo">
+
+
+                <div class="backcard">
+                  <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap"
+                    style="height: 250px; width: 100%;">
+                  <div *ngIf="!this.loginService.isAuthenticated()">
+                    <p class="card-text">Si quieres participar contacta con tu instituto para que te de de alta</p>
+                  </div>
+                  <div class="row botonesFijos"
+                    *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
                     
-                      <div class="backcard">
-                        <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap" style="height: 250px; width: 100%;">
-                          <div *ngIf="!this.loginService.isAuthenticated()">
-                          <p class="card-text">Si quieres participar contacta con tu instituto para que te de de alta</p>
-                        </div>
-                        <div class="row botonesFijos" *ngIf="this.loginService.isAuthenticated() && this.loginService.hasRole('ROLE_ADMIN')">
-                            <p class="card-text">{{instituto.nombre}}</p>
-                          <button type="button" name="actualizar"
-                          [routerLink]="[ '/institutos/form', instituto.id_instituto ]"
-                          class="btn btn-primary espacios">Editar</button>
-    
-                          <button type="button" name="eliminar" (click)="delete(instituto)"
-                            class="btn btn-primary espacios">Eliminar</button>
-                        </div>
-                        <div class="row botonesFijos "
-                          *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
-                          <p class="card-text">{{instituto.localizacion}}</p>
-  
-                        </div>
-                        
-                      </div>
-                    <div class="frontcard">          
-                      <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap" style="height: 300px; width: 100%;">
-                      <h4 class="card-title text-center ">{{instituto.nombre}}</h4>
-                      <p class="card-text text-center">{{instituto.localizacion}}</p>
-                      <p class="card-text text-center">{{instituto.telefono_contacto}}</p>
-                      <p class="card-text text-center">{{instituto.email_contacto}}</p>
-                      
-                    </div>
-  
-                    
-                    
-                  
+                    <button type="button" name="actualizar"
+                      [routerLink]="[ '/institutos/form', instituto.id_instituto ]"
+                      class="btn btn-primary espacios centrarBoton">Editar</button>
+
+                    <button type="button" name="eliminar" (click)="delete(instituto)"
+                      class="btn btn-primary espacios centrarBoton">Eliminar</button>
+                  </div>
+                  <div class="row botonesFijos"
+                    *ngIf="this.loginService.isAuthenticated() && !this.loginService.hasRole('ROLE_ADMIN')">
+                    <p class="card-text">{{instituto.localizacion}}</p>
+
+                  </div>
+
                 </div>
-  
-              
+                <div class="frontcard">
+                  <img class="card-img-top" src="../../assets/images/abril.png" alt="Card image cap"
+                    style="height: 300px; width: 100%;">
+                  <h4 class="card-title text-center ">{{instituto.nombre}}</h4>
+                  <p class="card-text text-center">{{instituto.localizacion}}</p>
+                  <p class="card-text text-center">{{instituto.telefono_contacto}}</p>
+                  <p class="card-text text-center">{{instituto.email_contacto}}</p>
+
+                </div>
+
+
+
+
               </div>
+
+
             </div>
           </div>
         </div>
-  
       </div>
-  
-    </section>
 
+    </div>
 
-
-<div class="card border-primary mb-3 d-none" >
-  <div class="card-header">institutos</div>
-  <div class="card-body text-primary">
-    <h5 class="card-title">Listado de institutos</h5>
-    <div class="my-2 text-left">
-  </div>
-
-  <div *ngIf="institutos?.length == 0" class="alert alert-info">
-    No hay registros en la base de datos 
-  </div>
-  
-  <div class="my-2 text-left"> 
-    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="[ '/institutos/form']">Añadir instituto</button>
-  </div>
-
-    <table class="table table-bordered table-striped" *ngIf="institutos?.length>0">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>CIF</th>
-          <th>Nombre</th>
-          <th>Localizacion </th>
-          <th>Telefono de contacto</th>
-          <th>Email de Contacto</th>  
-          <th>Editar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!--Cliente es el atributo que tenemos en la clase cliente.component.ts-->
-        <tr *ngFor="let instituto of institutos">
-          <td>{{instituto.id_instituto}}</td>
-          <td>{{instituto.cif_instituto}}</td>
-          <td>{{instituto.nombre}}</td>
-          <td>{{instituto.localizacion}}</td>
-          <td>{{instituto.telefono_contacto}}</td>
-          <td>{{instituto.email_contacto }}</td>
-          <td>
-            <button type="button" name="button"  [routerLink]="[ '/institutos/form', instituto.id_instituto ]" class="btn btn-primary">Editar</button>
-          </td>
-          <td>
-            <button type="button" name="eliminar"  (click)="delete(instituto)" class="btn btn-primary">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-
-    </table>
-    <!--[paginador] es el nombre que le damos al atributo en el componente paginador
-     y el ='' 
-    se le inyecta al atributo en el hijo
-  El de la clase padre se inyecta en el de la clase hijo
-si el paginador existe en el padre, se le inyecta al hijo
-    <app-paginator *ngIf="paginador" [paginador]="paginador" ></app-paginator>-->
-  </div> 
-</div>
+  </section>

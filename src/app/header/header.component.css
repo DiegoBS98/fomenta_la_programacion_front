@@ -1,7 +1,7 @@
 .fondo {
     background-image: linear-gradient(-90deg, #45526E, #8497b5);
     color:#f4f3f3;
-    height: 80px;
+    max-height: 300px;
     font-family: "robotoBold";
 }
 .espacios{
@@ -11,7 +11,7 @@
     background-color: #f0ad4e;
     border: #12292b;
     width: 70px;
-    margin-right: 20px;
+    margin-right: 70px;
     vertical-align: auto;
     margin-left: 20px;
 }

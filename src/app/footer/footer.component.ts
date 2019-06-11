@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CompeticionesComponent } from '../competiciones/competiciones.component';
+import { Competicion } from '../competiciones/competicion';
+import { LoginService } from '../usuarios/login.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService : LoginService ) { }
 
   ngOnInit() {
   }

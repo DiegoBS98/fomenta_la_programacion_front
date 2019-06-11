@@ -49,7 +49,7 @@ export class CompeticionService {
       //Conseguimos el token
       let token = this.loginService.token;
       if(token != null){
-        return this.httpHeader.append('Authorization', 'Bearer' + token)
+        return this.httpHeader.append('Authorization', 'Bearer' + token, )
       }
       return this.httpHeader;
     }
